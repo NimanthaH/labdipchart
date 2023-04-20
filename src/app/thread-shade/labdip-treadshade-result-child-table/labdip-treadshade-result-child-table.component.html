@@ -1,0 +1,124 @@
+<mat-card id="sopi">
+    <mat-card-header>    
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z8" style="text-align:left;">
+        <table mat-table [dataSource]="dataSource" id="labdipChartThredShadeResultTable" matSort (matSortChange)="announceSortChange($event)">    
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>IDX </th>
+                <td mat-cell *matCellDef="let element">{{element.index}}</td>                            
+            </ng-container>
+    
+            <ng-container matColumnDef="division">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>DIVISION </th>
+              <td mat-cell *matCellDef="let element">{{element.division}}</td>                            
+            </ng-container>
+    
+            <ng-container matColumnDef="season">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SEASON </th>
+              <td mat-cell *matCellDef="let element">{{element.season}}</td>                           
+            </ng-container>
+    
+            <ng-container matColumnDef="category" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>CATEGORY</th>
+              <td mat-cell *matCellDef="let element">{{element.category}}</td>
+            </ng-container>                         
+    
+            <ng-container matColumnDef="program" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>PROGRAM</th>
+              <td mat-cell *matCellDef="let element">{{element.program}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="styleNoIndividual">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>STYLE_NO_INDIVDUAL</th>
+              <td mat-cell *matCellDef="let element">{{element.styleNoIndividual}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="gmtDescription" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>GMT_DESCRIPTION</th>
+              <td mat-cell *matCellDef="let element">{{element.gmtDescription}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="gmtColor" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>GMT_COLOR</th>
+              <td mat-cell *matCellDef="let element">{{element.gmtColor}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="nrf" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>NRF</th>
+              <td mat-cell *matCellDef="let element">{{element.nrf}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="colorCode" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>COLOR_CODE</th>
+              <td mat-cell *matCellDef="let element">{{element.colorCode}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="packCombination" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header >PACK_COMBINATION</th>
+              <td mat-cell *matCellDef="let element">{{element.packCombination}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="palcementName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>PLACEMENT_NAME</th>
+              <td mat-cell *matCellDef="let element">{{element.palcementName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="bomSelection" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>BOM_SECTION</th>
+              <td mat-cell *matCellDef="let element">{{element.bomSelection}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="itemName" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ITEM_NAME</th>
+              <td mat-cell *matCellDef="let element">{{element.itemName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="supplierName" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SUPLIER_NAME</th>
+              <td mat-cell *matCellDef="let element">{{element.supplierName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="rmColor" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>RM_CLR</th>
+              <td mat-cell *matCellDef="let element">{{element.rmColor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="colorDyeingTechnic" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>CLR_DYE_TECH</th>
+              <td mat-cell *matCellDef="let element">{{element.colorDyeingTechnic}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="rmColorRef">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header>RM_COLOR_REF</th>
+              <td mat-cell *matCellDef="let element">{{element.rmColorRef}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="garmentWay">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header>GARMENT_WAY</th>
+              <td mat-cell *matCellDef="let element">{{element.garmentWay}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="fbNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>FB NUMBER</th>
+              <td mat-cell *matCellDef="let element">{{element.fbNumber}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="materialType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>MATERIAL TYPE</th>
+              <td mat-cell *matCellDef="let element">{{element.materialType}}</td>
+            </ng-container>   
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,200,500,1000]"
+                        showFirstLastButtons 
+                        aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+    </mat-card-content>
+  
+  
+  

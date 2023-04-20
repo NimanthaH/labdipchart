@@ -1,0 +1,31 @@
+export interface HeaderMaster {
+    Id: number;
+    HeaderType: string;
+    Variation: number;
+    FileName: string;
+    HeaderAttribute: string;
+    SubHeaderAttribute: string;
+    SetSameHeaderasValue: boolean;
+    SubValueAttribute: string;
+    LowerBoundHedaerName: string;
+    UpperBoundHeaderName: string;
+    HedaerName: string;
+    ColumnSpan: number;
+    RowSpan: number;
+    SubId: number;
+    ColumnNo: number;
+    RowNo: number;
+    LowerBoundColumnNo: number;
+    LowerBoundRowNo: number;
+    UpperBoundColumnNo: number;
+    UpperBoundRowNo: number;
+    UpdateforAll: boolean;
+    FilterData: string;
+    SkipBlanks: boolean;
+    RepeatData: boolean;
+    Split: string;
+    Replace: string;
+    Extract: string;
+    TransformData: string;
+    SaveTransformVariation: boolean;
+  }

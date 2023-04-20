@@ -1,0 +1,144 @@
+<mat-card id="sopi">
+    <mat-card-header>
+        <button mat-button style="background-color: #ff4081; margin-left: -30px;"
+            (click)="addNewRecord()"><mat-icon>add</mat-icon>ADD NEW HEADER</button>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="mat-elevation-z8" style="text-align:left;">
+            <table mat-table [dataSource]="dataSource" id="threadSahdeChartTable" matSort
+                (matSortChange)="announceSortChange($event)">
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>ACTION </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button style="background-color: transparent;" (click)="openDialog(element,2)"
+                            title="EDIT"><mat-icon>edit</mat-icon></button>
+                        <button mat-icon-button style="background-color: transparent;" (click)="openDialog(element,3)"
+                            title="DELETE"><mat-icon>delete</mat-icon></button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>INDEX </th>
+                    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="headerType">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>HEADER TYPE </th>
+                    <td mat-cell *matCellDef="let element">{{element.headerType}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="variation">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>VARIATION </th>
+                    <td mat-cell *matCellDef="let element">{{element.variation}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="fileName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>FILE NAME </th>
+                    <td mat-cell *matCellDef="let element">{{element.fileName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="headerAttribute">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>HEADER ATTRIBUTE </th>
+                    <td mat-cell *matCellDef="let element">{{element.headerAttribute}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="subHeaderAttribute">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SUB HEADER ATTRIBUTE </th>
+                    <td mat-cell *matCellDef="let element">{{element.subHeaderAttribute}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="setSameHeaderasValue">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SET SAME HEADER AS VALUE </th>
+                    <td mat-cell *matCellDef="let element">{{element.setSameHeaderasValue}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="subValueAttribute">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SUB VALUE ATTRIBUTE </th>
+                    <td mat-cell *matCellDef="let element">{{element.subValueAttribute}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="lowerBoundHedaerName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>LOWER BOUND HEADER NAME </th>
+                    <td mat-cell *matCellDef="let element">{{element.lowerBoundHedaerName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="upperBoundHeaderName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>UPPER BOUND HEADER NAME </th>
+                    <td mat-cell *matCellDef="let element">{{element.upperBoundHeaderName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="hedaerName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>HEADER NAME </th>
+                    <td mat-cell *matCellDef="let element">{{element.hedaerName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="rowSpan">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ROW SPAN </th>
+                    <td mat-cell *matCellDef="let element">{{element.rowSpan}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="columnSpan">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>COLUMN SPAN </th>
+                    <td mat-cell *matCellDef="let element">{{element.columnSpan}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="subId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SUB ID </th>
+                    <td mat-cell *matCellDef="let element">{{element.subId}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="updateforAll">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>UPDATE ALL </th>
+                    <td mat-cell *matCellDef="let element">{{element.updateforAll}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="filterData">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>FILTER DATA </th>
+                    <td mat-cell *matCellDef="let element">{{element.filterData}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="skipBlanks">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SKIP BLANKS </th>
+                    <td mat-cell *matCellDef="let element">{{element.skipBlanks}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="repeatData">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>REPEAT DATA </th>
+                    <td mat-cell *matCellDef="let element">{{element.repeatData}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="split">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SPLIT </th>
+                    <td mat-cell *matCellDef="let element">{{element.split}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="replace">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>REPLACE </th>
+                    <td mat-cell *matCellDef="let element">{{element.replace}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="extract">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>EXTRACT </th>
+                    <td mat-cell *matCellDef="let element">{{element.extract}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="transformData">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANSFORM DATA </th>
+                    <td mat-cell *matCellDef="let element">{{element.transformData}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="saveTransformVariation">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SAVE TRANSFORM VARIATION </th>
+                    <td mat-cell *matCellDef="let element">{{element.saveTransformVariation}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

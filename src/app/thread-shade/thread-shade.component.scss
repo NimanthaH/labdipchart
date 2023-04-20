@@ -1,0 +1,34 @@
+#sopi mat-form-field {
+    width: 100%;
+  }
+
+button {
+    background-color: #ff4081;
+}
+
+.button-footer{
+  background-color: #110580;
+}
+
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-small-box {
+  height: 100px;
+  width: 100px;
+}
+
+.example-large-box {
+  height: auto;
+  width: 100%;
+}
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}

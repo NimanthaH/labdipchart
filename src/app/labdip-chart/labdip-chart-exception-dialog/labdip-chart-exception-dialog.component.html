@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Exception</h1>
+<!-- <mat-progress-bar mode="query" color="ThemePalette" ></mat-progress-bar> -->
+<div class="content">
+  <mat-card id="sopi">
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content class="register-container">
+      <br>
+      <div class="mat-elevation-z8" style="text-align:left;">
+        <table mat-table [dataSource]="dataSource" id="placementExceptionTable" matSort
+          (matSortChange)="announceSortChange($event)">
+          <ng-container matColumnDef="keyin">
+            <th mat-header-cell *matHeaderCellDef>KEY </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button style="background-color: transparent;" (click)="openDialog(element)"
+                title="Key In Columns"><mat-icon>edit</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id </th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="initialPlacementName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Initial Placement Name </th>
+            <td mat-cell *matCellDef="let element">{{element.initialPlacementName}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="placementName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Drilled Down Placements </th>
+            <td mat-cell *matCellDef="let element">{{element.placementName}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20,50,100,200,500, dataSource.data.length]"
+          showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+
+    <button mat-button *ngIf="recordCountZero" style="background-color:darkslateblue;"
+      (click)="exportexcel('placementExceptionTable','placementException')">Export To Excel</button>
+
+  </mat-card>
+</div>
+
+<div mat-dialog-actions align="end">
+  <div style="justify-self: right;">
+     <button mat-button style="background-color: burlywood; " (click)="onNoClick()">Close</button>
+     <button mat-button style="background-color: #ff4081;" [mat-dialog-close]="data" cdkFocusInitial>Apply</button>
+  </div>
+</div>
+

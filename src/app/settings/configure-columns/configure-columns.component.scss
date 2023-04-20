@@ -1,0 +1,71 @@
+#sopi mat-form-field {
+    width: 100%;
+  }
+
+  button {
+      background-color: #ff4081;
+  }
+
+  .button-footer{
+    background-color: #110580;
+  }
+
+  table {
+    width: 100%;
+  }
+ 
+
+/*.mat-header-cell {
+  padding-left: 6px;   
+  box-sizing: border-box;
+  font-size: 9px; 
+}*/
+.mat-footer-cell,
+.mat-cell {
+  padding-left: 6px;   
+  box-sizing: border-box;
+  font-size: 11px; 
+}
+
+.table-responsive {
+  display: block;
+  height: 310px;
+  max-width: 100%;
+  width: 100%;
+  overflow: auto;
+  .mat-table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      display: table;
+      border-collapse: collapse;
+      margin: 0px;
+  }
+  .mat-row,
+  .mat-header-row {
+      display: table-row;
+  }
+  .mat-cell,
+  .mat-header-cell {
+      word-wrap: initial;
+      display: table-cell;
+      padding: 0px 5px;
+      line-break: unset;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+  }
+
+  .mat-paginator {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+}
+
+
+  

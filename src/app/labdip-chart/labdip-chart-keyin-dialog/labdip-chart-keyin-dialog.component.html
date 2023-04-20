@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Key In </h1>
+<div mat-dialog-content>
+  <p>Enter Key in Columns, Selected Row Number : {{data.index}} </p>
+  <div class="row>">   
+      <mat-form-field appearance="fill">      
+          <mat-label>Program</mat-label>       
+          <input matInput [(ngModel)]="data.program" >  
+      </mat-form-field>
+  </div>
+  <div class="row">    
+      <mat-form-field appearance="fill">
+        <mat-label>Pack Combination</mat-label>      
+          <input matInput  [(ngModel)]="data.packCombination">               
+    </mat-form-field> 
+  </div>
+  <div class="row">    
+    <mat-form-field appearance="fill">
+      <mat-label>RM Color Ref.</mat-label>      
+        <input matInput  [(ngModel)]="data.rmColorRef">               
+  </mat-form-field> 
+</div>
+
+</div>
+<div class="row">
+    <mat-checkbox align="start" name="applyToAll"  [(ngModel)]="data.applyToAll" >Apply to All</mat-checkbox>  
+</div>
+ 
+
+<div mat-dialog-actions align="end">
+  <div style="justify-self: right;">
+     <button mat-button style="background-color: burlywood; " (click)="onNoClick()">Close</button>
+     <button mat-button style="background-color: #ff4081;" [mat-dialog-close]="data" cdkFocusInitial>Apply</button>
+  </div>
+</div>
+

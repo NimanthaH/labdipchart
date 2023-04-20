@@ -1,0 +1,76 @@
+<mat-card id="sopi">
+    <mat-card-header>    
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z8" style="text-align:left;">
+        <table mat-table [dataSource]="dataSource" id="threadSahdeChartTable" matSort (matSortChange)="announceSortChange($event)">    
+            
+          
+          <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>IDX </th>
+                <td mat-cell *matCellDef="let element">{{element.index}}</td>                            
+            </ng-container>
+
+            <ng-container matColumnDef="season">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SEASON </th>
+              <td mat-cell *matCellDef="let element">{{element.season}}</td>                           
+            </ng-container>
+    
+            <ng-container matColumnDef="fs" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>FS</th>
+              <td mat-cell *matCellDef="let element">{{element.fs}}</td>
+            </ng-container>                         
+    
+            <ng-container matColumnDef="washOrNonWash" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>WashOrNonWash</th>
+              <td mat-cell *matCellDef="let element">{{element.washOrNonWash}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="fabricReference">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>FabricReference</th>
+              <td mat-cell *matCellDef="let element">{{element.fabricReference}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="rmBaseColorNameAndCode" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>RMBaseColorNameAndCode</th>
+              <td mat-cell *matCellDef="let element">{{element.rmBaseColorNameAndCode}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="washTechAndColor" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>WashTechAndColor</th>
+              <td mat-cell *matCellDef="let element">{{element.washTechAndColor}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="requestedThread" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>RequestedThread</th>
+              <td mat-cell *matCellDef="let element">{{element.requestedThread}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="threadSahde" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ThreadSahde</th>
+              <td mat-cell *matCellDef="let element">{{element.threadSahde}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="repairThreadShade" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>RepairThreadShade</th>
+              <td mat-cell *matCellDef="let element">{{element.repairThreadShade}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="comment" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>COMMENT</th>
+              <td mat-cell *matCellDef="let element">{{element.comment}}</td>
+            </ng-container>  
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,200,500,1000]"
+                        showFirstLastButtons 
+                        aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+    </mat-card-content>
+  
+  
+  

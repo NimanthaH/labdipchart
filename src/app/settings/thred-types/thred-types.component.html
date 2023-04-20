@@ -1,0 +1,49 @@
+<mat-card id="sopi">
+    <mat-card-header> 
+        <button mat-button style="background-color: #ff4081; margin-left: -30px;" (click)="addNewRecord()"><mat-icon>add</mat-icon>Add New Thread Type</button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z8" style="text-align:left;">
+        <table mat-table [dataSource]="dataSource" id="threadSahdeChartTable" matSort (matSortChange)="announceSortChange($event)"> 
+         <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-icon-button style="background-color: transparent;" (click)="openDialog(element,2)" title="Edit"><mat-icon>edit</mat-icon></button>
+                  <button mat-icon-button style="background-color: transparent;" (click)="openDialog(element,3)" title="Delete"><mat-icon>delete</mat-icon></button>  
+                </td> 
+            </ng-container>  
+
+          <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>INDEX </th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>                            
+            </ng-container>
+
+            <ng-container matColumnDef="threadType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>THREAD TYPE NAME </th>
+              <td mat-cell *matCellDef="let element">{{element.threadType}}</td>                           
+            </ng-container>          
+    
+            <ng-container matColumnDef="supplier">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SUPPLIER </th>
+              <td mat-cell *matCellDef="let element">{{element.supplier}}</td>                           
+            </ng-container>  
+
+            <ng-container matColumnDef="ticketNo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>TICKET NO</th>
+              <td mat-cell *matCellDef="let element">{{element.ticketNo}}</td>                           
+            </ng-container>  
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 20,50]"
+                        showFirstLastButtons 
+                        aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+    </mat-card-content>
+</mat-card>
+  
+  
+

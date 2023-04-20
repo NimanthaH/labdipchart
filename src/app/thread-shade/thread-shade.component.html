@@ -1,0 +1,57 @@
+<div class="content">
+    <mat-card id="sopi">
+        <mat-card-header>                  
+        </mat-card-header>
+        <mat-card-content class="register-container">
+            <form>
+                <div class="row">                
+                    <div class="col-md-5 pl-md-4">
+                        <mat-form-field>
+                            <ngx-mat-file-input (change)="onLabdipFileSelected($event)" placeholder="Select Labdip Chart File to Process 'xlxs' files only" [accept]="'.xlsx'"></ngx-mat-file-input>
+                            <mat-icon matSuffix>folder</mat-icon>
+                        </mat-form-field>                     
+                    </div>
+                    <div class="col-md-5 pl-md-4">
+                        <mat-form-field>
+                            <ngx-mat-file-input (change)="onTreadShadeFileSelected($event)" placeholder="Select Thread Shade File to Process 'xlxs' files only" [accept]="'.xlsx'"></ngx-mat-file-input>
+                            <mat-icon matSuffix>folder</mat-icon>
+                        </mat-form-field>                     
+                    </div>
+                    <div class="col-md-5 pl-md-4">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Thread Types</mat-label>
+                        <mat-select [formControl]="toppings" multiple (selectionChange)="onThreadTypeChange($event)">
+                          <mat-select-trigger>
+                            {{toppings.value ? toppings.value[0] : ''}}
+                            <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                              (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                          </mat-select-trigger>                            
+                          <mat-option *ngFor="let threadType of threadTypes" [value]="threadType.threadType">
+                            {{threadType.threadType + "  (" + threadType.supplier +")  " + threadType.ticketNo}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>                                           
+                    </div>
+                    <div class="col-md-2 pl-md-4">
+                        <button mat-button style="background-color: #ff4081;" (click)="processFiles()" [disabled]="notNewFileSelect">Process</button>                            
+                    </div>
+                </div>                   
+              </form>              
+
+              <mat-tab-group *ngIf="recordCountZero" dynamicHeight mat-align-tabs="end">
+                <mat-tab label="Result">
+                  <app-labdip-treadshade-result-child-table  [events]="eventSubject.asObservable()"></app-labdip-treadshade-result-child-table>                    
+                </mat-tab>
+                <mat-tab label="Labdip Chart">                  
+                   <app-labdip-child-table></app-labdip-child-table>                 
+                </mat-tab>
+                <mat-tab label="Thread Shade">                    
+                   <app-thread-shade-child-table></app-thread-shade-child-table>
+                  </mat-tab>
+              </mat-tab-group>
+              
+        </mat-card-content>
+        <button mat-button *ngIf="recordCountZero" style="background-color:darkslateblue;" (click)="exportThreadshadeResultToExcel()" >Export To Excel</button>    
+    </mat-card>
+</div>

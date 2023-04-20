@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{action}} </h1>
+<div mat-dialog-content>
+  <p>Enter Thread Type, Selected Row Number : {{data.id}} </p>
+  <div class="row>">   
+      <mat-form-field appearance="fill">      
+          <mat-label>Index</mat-label>       
+          <input matInput [(ngModel)]="data.id" [disabled]="lockStatus" >  
+      </mat-form-field>
+  </div>
+  <div class="row">    
+      <mat-form-field appearance="fill">
+        <mat-label>Thread Type</mat-label>      
+          <input matInput  [(ngModel)]="data.threadType">               
+    </mat-form-field> 
+  </div> 
+  <div class="row">    
+    <mat-form-field appearance="fill">
+      <mat-label>Supplier</mat-label>      
+        <input matInput  [(ngModel)]="data.supplier">               
+  </mat-form-field> 
+</div> 
+<div class="row">    
+  <mat-form-field appearance="fill">
+    <mat-label>Ticket No</mat-label>      
+      <input matInput  [(ngModel)]="data.ticketNo">               
+</mat-form-field> 
+</div> 
+</div>
+ 
+<div mat-dialog-actions align="end">
+  <div style="justify-self: right;">
+     <button mat-button style="background-color: burlywood; " (click)="onNoClick()">Close</button>
+     <button mat-button style="background-color: #ff4081;" [mat-dialog-close]="data" cdkFocusInitial>{{action}}</button>
+  </div>
+</div>
+
