@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LoaderService } from '../services/loader.service';
 
-
-
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -17,12 +15,12 @@ export class NavigationComponent {
   menuList = [
     {
       "text": "Labdip Chart",
-      "icon": "reorder",
+      "icon": "table_chart",
       "routerLink": "/labdipChart"
     },
     {
       "text": "Thread Shade",
-      "icon": "reorder",
+      "icon": "publish",
       "routerLink": "/threadShade"
     },
     {

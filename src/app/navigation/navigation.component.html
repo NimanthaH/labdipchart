@@ -2,10 +2,11 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [opened]="(isHandset$ | async) === false">  
     <mat-nav-list *ngFor="let menu of menuList">
       <a mat-list-item [routerLink]="menu.routerLink">
         <button mat-icon-button style="background-color: transparent;" title={{menu.text}} (click)="navbarSelect(menu.text)"><mat-icon>{{menu.icon}}</mat-icon></button>
+        {{menu.text}}
       </a>    
     </mat-nav-list>
   </mat-sidenav>
@@ -14,15 +15,14 @@
       <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
     </div>    
     <mat-toolbar color="primary">
-      <h1>{{navbarTitile}}</h1>
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+      <h1>{{navbarTitile}}</h1>
       <span></span>
       <span style="flex:auto;"></span>
       <mat-slide-toggle [(ngModel)]="isLightTheme" (change)="storeThemeSelection()">{{themeName}} </mat-slide-toggle>

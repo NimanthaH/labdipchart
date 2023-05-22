@@ -7,7 +7,8 @@ import { ThreadShadeComponent } from './thread-shade/thread-shade.component';
 
 
 const routes: Routes = [
-  { path:"*",component:HomeComponent},
+  { path: "*", component:HomeComponent},
+  { path: "",component:HomeComponent},
   { path: "home", component:HomeComponent},
   { path: "labdipChart", component: LabdipChartComponent },
   { path: "threadShade", component: ThreadShadeComponent },

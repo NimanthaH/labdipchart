@@ -8,6 +8,6 @@
 
   (function (window) { 
       window.__env = window.__env || {};   
-      window.__env.apiUrl = "http://bia-winsrv-tst1:8301/api/"; //"http://localhost:5000/api/"; //
+      window.__env.apiUrl = "http://bia-winsrv-tst1:8301/api/"; //"http://localhost:5000/api/"; // 
       window.__env.apiVer = "1.0";
     } (this));

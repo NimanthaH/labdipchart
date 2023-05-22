@@ -17,6 +17,7 @@ import { EnvService } from '../services/env.service';
 import { FormControl } from '@angular/forms';
 import { Options } from '../model/options';
 import { Customers } from '../model/customers';
+import * as XLSXStyle from 'xlsx-style';
 
 
 @Component({
@@ -94,15 +95,16 @@ export class LabdipChartComponent implements AfterViewInit {
 
   onOptionChange(event: any) {
     this.selectedOption = event.value;
-    var optiontype = <Options[]> this.Options.filter(c => c.optionId == event.value);
-      if(optiontype != null && optiontype.length > 0 && optiontype[0].type == "BOM") {
+    var optiontype = <Options[]>this.Options.filter(c => c.optionId == event.value);
+    if (optiontype != null && optiontype.length > 0 && optiontype[0].type == "BOM") {
 
-      } else if(optiontype == null && optiontype.length == 0) {
-        
-      }
+    } else if (optiontype == null && optiontype.length == 0) {
+
+    }
   }
 
   onCustomerChange(event: any) {
+    console.log('event: ', event);
     this.selectedCustomer = event.value;
   }
 
@@ -141,16 +143,16 @@ export class LabdipChartComponent implements AfterViewInit {
 
       const formData: FormData = new FormData();
 
-      if(this.selectedOption == null && this.selectedOption == "") {
+      if (this.selectedOption == null && this.selectedOption == "") {
         this.notNewFileSelect = false;
         this.recordCountZero = false;
         this._notifierService.showNotification('select an option before proceed', 'OK');
         return;
       } else {
-        formData.append( this.selectedOption, "option");
+        formData.append(this.selectedOption, "option");
       }
 
-      if(techPackFiles != null && techPackFiles.length > 0) {
+      if (techPackFiles != null && techPackFiles.length > 0) {
         for (let i = 0; i < techPackFiles.length; i++) {
           formData.append('techpackfile', techPackFiles[i], techPackFiles[i].name);
         }
@@ -161,9 +163,9 @@ export class LabdipChartComponent implements AfterViewInit {
         return;
       }
 
-      var optiontype = <Options[]> this.Options.filter(c => c.optionId == this.selectedOption);
-      if(optiontype != null && optiontype.length > 0 && optiontype[0].type == "BOM") {
-        if(lineMtarixFile != null) {
+      var optiontype = <Options[]>this.Options.filter(c => c.optionId == this.selectedOption);
+      if (optiontype != null && optiontype.length > 0 && optiontype[0].type == "BOM") {
+        if (lineMtarixFile != null) {
           formData.append('linematrixfile', lineMtarixFile, lineMtarixFile.name);
         } else {
           this.notNewFileSelect = false;
@@ -171,28 +173,30 @@ export class LabdipChartComponent implements AfterViewInit {
           this._notifierService.showNotification('line matrix cant be empty', 'OK');
           return;
         }
-      } else if(optiontype == null && optiontype.length == 0) {
-          this.notNewFileSelect = false;
-          this.recordCountZero = false;
-          this._notifierService.showNotification('before procced please select an valid option', 'OK');
-          return;
+      } else if (optiontype == null && optiontype.length == 0) {
+        this.notNewFileSelect = false;
+        this.recordCountZero = false;
+        this._notifierService.showNotification('before procced please select an valid option', 'OK');
+        return;
       }
 
-      if(this.selectedCustomer != null && this.selectedCustomer == 0 ) {
+      if (this.selectedCustomer != null && this.selectedCustomer == 0) {
         this.notNewFileSelect = false;
         this.recordCountZero = false;
         this._notifierService.showNotification('before procced please select an valid customer', 'OK');
         return;
       } else {
-        //formData.append(this.selectedCustomer.toString(), "customer");
+        console.log('selectedCustomer: ', this.selectedCustomer);
+        formData.append(this.selectedCustomer.toString(), "customer");
       }
 
       //console.log('formdata:', formData.getAll('techpackfile'));
 
-      if(true) {
+      if (true) {
         let headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': 'Basic' });
+          'Authorization': 'Basic'
+        });
         let head = { headers: headers };
 
         await this.http.post(`${this._envService.apiUrl}labdip/labdipChart`, formData).subscribe(result => {
@@ -208,15 +212,20 @@ export class LabdipChartComponent implements AfterViewInit {
             this._notifierService.showNotification('result fletch failed', 'OK');
           }
 
-          if (output != null && output.length > 0) {
-            console.log(output[0]);
+          if (output && output != null && output.length > 0) {
+            let index = 1;
+            output[0]?.forEach((c: { index: number; }) => {
+              c.index = index++;
+            });
+            this.dataSource.paginator = null; // Disable pagination
             this.dataSource.data = <LabdipChartVM[]>output[0];
-            if (this.dataSource.data.length > 0) {
-              this.notNewFileSelect = true;
-              this.recordCountZero = true;
-              this._notifierService.showNotification("success", 'OK');
-              this.pageSize = this.dataSource.data.length;
-            } else {}
+            this.notNewFileSelect = true;
+            this.recordCountZero = true;
+            this._notifierService.showNotification("success", 'OK');
+
+            this.dataSource.sort = this.sort;
+            //this.dataSource.paginator = this.paginator; // Remove this line
+            this.pageSize = this.dataSource.data.length; // Remove this line
           } else {
             this.notNewFileSelect = false;
             this.recordCountZero = false;
@@ -274,6 +283,9 @@ export class LabdipChartComponent implements AfterViewInit {
   prepareKeyInData(element: any): LabdipChartKeyinData {
     let labdipChartKeyData: LabdipChartKeyinData = {
       index: element.index,
+      division: element.division,
+      season: element.season,
+      category: element.category,
       program: element.program,
       packCombination: element.packCombination,
       rmColorRef: element.rmColorRef,
@@ -283,21 +295,53 @@ export class LabdipChartComponent implements AfterViewInit {
   }
 
   exportexcel(tableId: string, name?: string) {
-    /* pass here the table id */
-    let element = document.getElementById("labdipChartTable");
+    /* Pass the table ID */
+    let element = document.getElementById(tableId) as HTMLTableElement;
+    console.log('element: ', element);
+    let rows = element.rows;
+  
+    for (let i = 0; i < rows.length; i++) {
+      let cells = rows[i].cells;
+      cells[0].remove();
+    }
+  
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
+    console.log('ws: ', ws);
+  
+    /* Find the range of the data */
+    const range: XLSX.Range = XLSX.utils.decode_range(ws['!ref'] || '');
+  
+    /* Set the autofilter range to include all columns based on the header row */
+    const headerRow = range.s.r; // Get the row index of the header row
+    const filterRange = { s: { r: headerRow, c: range.s.c }, e: { r: range.e.r, c: range.e.c } };
+    ws['!autofilter'] = { ref: XLSX.utils.encode_range(filterRange) };
+  
+    console.log();
+  
+    for (let row = range.s.r; row <= range.e.r; row++) {
+      for (let col = range.s.c; col <= range.e.c; col++) {
+        var cell = ws[XLSX.utils.encode_cell({ r: row, c: col })];
+        cell.t = 's';
+  
+        // Check if the cell value starts with a leading zero
+        const cellValue = cell.v.toString();
+        if (cellValue.startsWith('0')) {
+          // Prepend a single quote to the value to force Excel to treat it as text
+          cell.v = "'" + cellValue;
+        }
+      }
+    }
+  
+    /* Generate a workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
+  
+    /* Save to a file */
     let timeSpan = new Date().toISOString();
     let prefix = name || "ExportResult";
     let fileName = `${prefix}-${timeSpan}`;
     XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
-
 }
 
 

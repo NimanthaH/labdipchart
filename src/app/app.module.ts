@@ -30,7 +30,6 @@ import { AddnewUpdateDialogComponent } from './settings/thred-types/addnew-updat
 import { ConfigureColumnsComponent } from './settings/configure-columns/configure-columns.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +55,7 @@ import { ConfigureColumnsComponent } from './settings/configure-columns/configur
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    HttpClientModule,   
+    HttpClientModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true},EnvServiceProvider
